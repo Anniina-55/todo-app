@@ -1,0 +1,9 @@
+/*Provide styling (style.css) to add some whitespace around header (top and bottom 1em,
+left and right 0) and form (bottom 1em). Check out that styles are applied to the page.*/
+
+h2 {
+    margin: 1em 0;
+}
+form {
+    margin-bottom: 1em;
+}
