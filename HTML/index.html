@@ -2,12 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
-
-    <!-- Fonts-->
-    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
-         
     
     <!-- Bootstraps css styling with CDN (content delivery network) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -19,21 +15,22 @@
 </head>
 <body>
 
-    <div class="container-fluid mt-4"> <!--full-width container with margin-top-->
-        <h2 class="text-center text-dark">My todos</h2> <!--define text positioning and style-->
+    <div class="container-fluid"> <!--full-width container-->
+        <h2 class="text-left text-dark">My todos</h2> <!--define text positioning and style-->
         
         <!-- Form for adding the tasks -->
-        <div class="mb-3">
-            <label for="taskInput" class="form-label">New task</label>
+        <form>
+            <label for="taskInput" class="form-label" style="font-style: italic;">Have a task in mind?</label>
             <input type="text" class="form-control" id="taskInput" name="Task" placeholder="Enter task...">
-            <button class="btn btn-primary mt-2" id="addTask">Add task</button>
-        </div>
+        <!-- Optional button for adding task, not used in this task 
+         <button class="btn btn-primary mt-2" id="addTask">Add task</button> -->
+        </form>
 
-        <!-- Task List -->
+        <!-- Task list -->
         <ul class="list-group" id="taskList">
             <!--<li class="list-group-item d-flex justify-content-between align-items-center">
                 Example task...
-                <button class="btn btn-danger btn-sm">X</button>
+                <button class="btn btn-danger btn-sm"> X </button>
             </li>-->
         </ul>
     </div>

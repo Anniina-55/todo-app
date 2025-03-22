@@ -9,6 +9,7 @@ const taskList = document.querySelector('ul');
 
 input.disabled = false;
 
+
 const getTasks = () => {
     todos.getTasks().then((tasks) => {
         console.log('Your current tasks:', tasks)
@@ -25,6 +26,7 @@ const getTasks = () => {
 const renderTask = (task) => {
     const li = document.createElement('li')
     li.setAttribute('class', 'list-group-item')
+    li.setAttribute('style', 'background-color: rgba(245, 209, 223, 0.8); border: 0.5px solid pink; margin-bottom: 1.5px; font-weight: 500')
     li.setAttribute('data-key', task.getId().toString())
     //li.innerHTML = task.getText()
     renderSpan(li, task.getText())
@@ -40,14 +42,16 @@ const renderSpan = (taskList, text) => {
 const renderLink = (taskList, id) => {
     const a = taskList.appendChild(document.createElement('a'))
     a.innerHTML = '<i class="bi bi-trash"></i>'
-    a.setAttribute('style', 'float: right')
+    a.setAttribute('style', 'float: right; cursor: pointer')
     
     a.addEventListener('click', (event) => {
         todos.removeTask(id).then((removed_id) => {
             const taskToRemove = document.querySelector(`[data-key='${removed_id}']`)
             console.log(taskToRemove)
             if (taskToRemove) {
-                taskList.removeChild(taskToRemove)
+                taskToRemove.remove()
+                //this only removes after page refresh:
+                // taskList.removeChild(taskToRemove)
             }
         }).catch((error) => {
             alert(error)
@@ -55,7 +59,7 @@ const renderLink = (taskList, id) => {
     })
 }
 
-const saveTask = async (task) => {
+/*const saveTask = async (task) => {
     try {
         const json = JSON.stringify({description: task})
         const response = await fetch(BACKEND_ROOT_URL + '/new', {
@@ -72,6 +76,7 @@ const saveTask = async (task) => {
         alert("Error saving task " + error.message)
         }
 }
+*/
 
 input.addEventListener('keypress', (event) => {
     if (event.key === 'Enter') {
@@ -89,7 +94,5 @@ input.addEventListener('keypress', (event) => {
     }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    getTasks();
-});
+getTasks()
 
