@@ -7,7 +7,20 @@ const todos = new Todos(BACKEND_ROOT_URL)
 const input = document.querySelector('input'); 
 const taskList = document.querySelector('ul');
 
-input.disabled = true;
+input.disabled = false;
+
+const getTasks = () => {
+    todos.getTasks().then((tasks) => {
+        console.log('Your current tasks:', tasks)
+        input.disabled = false
+        tasks.forEach(task => {
+            renderTask(task)
+        })
+    }).catch((error) => {
+        alert(error)
+    })
+
+}
 
 const renderTask = (task) => {
     const li = document.createElement('li')
@@ -33,7 +46,7 @@ const renderLink = (taskList, id) => {
         todos.removeTask(id).then((removed_id) => {
             const taskToRemove = document.querySelector(`[data-key='${removed_id}']`)
             console.log(taskToRemove)
-            if (taskToRemove && taskList.contains(taskToRemove)) {
+            if (taskToRemove) {
                 taskList.removeChild(taskToRemove)
             }
         }).catch((error) => {
@@ -42,17 +55,6 @@ const renderLink = (taskList, id) => {
     })
 }
 
-const getTasks = () => {
-    todos.getTasks().then((tasks) => {
-        tasks.forEach(task => {
-            renderTask(task)
-        })
-        input.disabled = false
-    }).catch((error) => {
-        alert(error)
-    })
-
-}
 const saveTask = async (task) => {
     try {
         const json = JSON.stringify({description: task})
@@ -63,12 +65,13 @@ const saveTask = async (task) => {
             },
             body: json
         })
-        return response.json()
+        if (!response.ok) {
+            return response.json()
+        }    
     } catch (error) {
         alert("Error saving task " + error.message)
         }
-    }
-
+}
 
 input.addEventListener('keypress', (event) => {
     if (event.key === 'Enter') {
@@ -81,7 +84,7 @@ input.addEventListener('keypress', (event) => {
                 renderTask(task)
                 input.value = ''
                 input.focus()
-            })
+            }).catch(error => console.log('error in addTask', error))
         }
     }
 });
@@ -90,54 +93,3 @@ document.addEventListener('DOMContentLoaded', () => {
     getTasks();
 });
 
-
-
-/*const express = require("express");
-const cors = require("cors");
-const { Pool } = require("pg")
-
-const app = express();
-app.use(cors());
-app.use(express.json());
-const port = 3002;
-
-const openDb = () => {
-    const pool = new Pool ({
-        user: 'postgres',
-        host: 'localhost',
-        database: 'todo', 
-        password: 'root',
-        port: 5432
-    });
-    return pool;
-};
-
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`)
-});
-
-app.get("/", (req, res) => {
-    const pool = openDb()
-
-    pool.query('SELECT * FROM task', (error, result) => {
-        if (error) {
-            return res.status(500).json({ error: error.message })
-        }
-        res.status(200).json(result.rows);
-    })
-});
-
-app.post("/new", (req, res) => {
-    const pool = openDb()
-
-    pool.query('INSERT INTO task (description) VALUES ($1) RETURNING *',
-        [req.body.description],
-        (error, result) => {
-            if(error) {
-                res.status(500).json({error: error.message})
-            } else {
-                res.status(200).json({id: result.rows[0].id})
-            }
-        })
-}); 
-*/
