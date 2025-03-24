@@ -26,7 +26,7 @@ A simple Todo app built with Node.js (backend) and vanilla JavaScript (frontend)
 1. Navigate to the `server` folder.
 2. Run `npm install` to install backend dependencies.
 3. Configure your database (if needed).
-4. Run `npm start` to start the backend server.
+4. Run `npm run devStart` to start the backend server.
 
 ## Usage
 
