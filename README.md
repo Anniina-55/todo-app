@@ -15,6 +15,9 @@ A simple Todo app built with Node.js (backend) and vanilla JavaScript (frontend)
 
 ## Setup Instructions
 
+### Clone the repository to your local machine
+- run command: git clone https://github.com/Anniina-55/todo-app.git
+
 ### Frontend
 
 1. Run `npm install` to install frontend dependencies.
