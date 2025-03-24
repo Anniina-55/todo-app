@@ -6,7 +6,7 @@ const todoRouter = express.Router()
 
 
 todoRouter.get('/', async (req, res) => {
-    console.log('Fetching task from database:', query)
+    console.log('Fetching task from database:', re.query)
     try {
         const result = await query('SELECT * FROM task')
         const rows = result.rows ? result.rows : []
