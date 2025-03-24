@@ -21,7 +21,7 @@ A simple Todo app built with Node.js (backend) and vanilla JavaScript (frontend)
 ### Frontend
 
 1. Run `npm install` to install frontend dependencies.
-2. Run `npm start` to start the frontend development server.
+2. Open the index.html in your browser
 
 ### Backend
 
